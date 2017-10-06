@@ -3,6 +3,10 @@
 
 ## How to start?
 1. Install node.js
-2. Navigate to airlineapp directory
-4. Execute `npm install` to install all dependencies
-3. Execute `npm start`. The server will run at 127.0.0.1:3000
+2. Navigate to airlineapp directory in your command line
+3. Use the following commands to:
+```
+npm install         # install all dependencies
+npm start           # start server @127.0.0.1:3000
+node db_example.js  # initialise example database
+```
