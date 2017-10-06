@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="onsen-ui/css/onsenui.css">
+  <link rel="stylesheet" href="onsen-ui/css/onsen-css-components.min.css">
+  <script src="onsen-ui/js/onsenui.min.js"></script>
+  <script>
+    document.addEventListener('init', function(event) {
+      var page = event.target;
+      if (page.matches('#helloworld-page')) {
+        page.querySelector('ons-toolbar .center').innerHTML = 'My app';
+        page.querySelector('ons-button').onclick = function() {
+          ons.notification.alert('Hello world!');
+        };
+      }
+    });
+  </script>
+</head>
+<body>
+    <ons-page id="helloworld-page">
+      <ons-toolbar>
+        <div class="center"></div>
+        <div class="right">
+          <ons-toolbar-button>
+            <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+
+      <p style="text-align: center">
+        <ons-button>Click me!</ons-button>
+      </p>
+    </ons-page>
+</body>
+</html>
