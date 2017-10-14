@@ -10,4 +10,8 @@ router.get('/game', function(req, res, next) {
   res.render('game', {});
 });
 
+router.get('/testpage', function(req, res, next) {
+  res.render('newtestpage', {});
+});
+
 module.exports = router;

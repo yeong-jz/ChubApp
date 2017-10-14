@@ -1,0 +1,26 @@
+
+<p style="text-align: center">
+<ons-navigator animation="slide" var="app.navi">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">1</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Push</ons-button>
+    </p>
+  </ons-page>
+</ons-navigator>
+
+<p style="text-align: center">
+<ons-template id="page.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">2</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Pop</ons-button>
+    </p>
+  </ons-page>
+</ons-template>
