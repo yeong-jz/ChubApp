@@ -5,31 +5,384 @@
   <link rel="stylesheet" href="onsen-ui/css/onsen-css-components.min.css">
   <script src="onsen-ui/js/onsenui.min.js"></script>
   <script>
-    document.addEventListener('init', function(event) {
-      var page = event.target;
-      if (page.matches('#helloworld-page')) {
-        page.querySelector('ons-toolbar .center').innerHTML = 'My app';
-        page.querySelector('ons-button').onclick = function() {
-          ons.notification.alert('Hello world!');
+  document.addEventListener('init', function(event) {
+    var page = event.target;
+
+    if (page.id === 'index') {
+      page.querySelector('#nearby').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('nearby.html');
+      };
+      page.querySelector('#favourites').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('favourites.html');
+      };
+      page.querySelector('#frequent_visit').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('frequent_visit.html');
+      };
+      page.querySelector('#cuisines').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('cuisines.html');
+      };
+      page.querySelector('#locations').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('locations.html');
+      };
+      page.querySelector('#fuck').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('fuck.html');
+      };
+    }
+    else if (page.id === 'nearby') {
+      page.querySelector('#push-button').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      };
+    }
+    else if (page.id === 'favourites') {
+      page.querySelector('#push-button').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      };
+    }
+    else if (page.id === 'frequent_visit') {
+      page.querySelector('#push-button').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      };
+    }
+    else if (page.id === 'cuisines') {
+      page.querySelector('#push-button').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      };
+    }
+    else if (page.id === 'locations') {
+      page.querySelector('#push-button1').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('arabST.html');
+      }
+      page.querySelector('#push-button2').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button3').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button4').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button5').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button6').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button7').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button8').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button9').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button10').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button11').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button12').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button13').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button14').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button15').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('fuck.html');
+      }
+      page.querySelector('#push-button16').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button17').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button18').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button19').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button20').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+      page.querySelector('#push-button21').onclick = function() {
+        document.querySelector('#myNavigator').pushPage('index.html');
+      }
+    }
+    else if (page.id === 'arabST') {
+      var arablist = [
+        "26 Tapas Bar",
+        "A Thousand Tales",
+        "Alaturka Turkish & Mediterranean Restaurant",
+        "Altazzag Egyptian Restaurant",
+        "Ambrosia",
+        "Artistry",
+        "Ash and Elm",
+        "Beirut Grill",
+        "Bumbu Restaurant",
+        "Byblos Grill",
+        "CAD Cafe",
+        "Café Le Caire",
+        "Choo Choo Chicken",
+        "Cicheti",
+        "Clover Garden",
+        "Crossings Cafe",
+        "Derwish Turkish Restaurant",
+        "Don Antonio Pizza Bar",
+        "Elffin & Elffin Gallery Café",
+        "espressoLAB",
+        "Fictive Fingers+ And All Things Delicious",
+        "Fika Cafe & Bistro",
+        "Fluff Bakery",
+        "Flying Monkey",
+        "Gourmet Port",
+        "Hajah Maimunah",
+        "Hararu Izakaya",
+        "I am",
+        "Islamic Restaurant",
+        "Koh Nangkam Southern Thai Restaurant",
+        "KOI Bangers + Izakaya",
+        "La Marelle Cafe & Boutique",
+        "Le Pont De Vie",
+        "Leong Kee (Klang) Bah Kut Teh",
+        "Lickety Ice Cream & Waffles Parlour",
+        "Ma Maison (Bugis)",
+        "Maison Ikkoku",
+        "Maison Ikkoku Cocktail Bar",
+        "Nabins Experience Arabia",
+        "Nong Khai",
+        "NOX - Dine in the Dark",
+        "Ogopogo",
+        "Panko",
+        "Piedra Negra",
+        "Pizza Fabbrica",
+        "Ramen Champion (Bugis+)",
+        "Sinseh : The Grocery",
+        "Sufi Turkish and Mediterranean Restaurant",
+        "SushiAirways",
+        "Symmetry",
+        "The Hangar",
+        "The Lab SG",
+        "Toots Brasserie",
+        "Vatos Urban Tacos",
+        "Vintage Delicafe"];
+        page.querySelector('#randomise').onclick = randomRestGenerator(arablist);
+      }
+      else if (page.id === 'fuck') {
+        page.querySelector('#push-button').onclick = function() {
+          document.querySelector('#myNavigator').pushPage('index.html');
         };
       }
     });
-  </script>
-</head>
-<body>
-    <ons-page id="helloworld-page">
-      <ons-toolbar>
-        <div class="center"></div>
-        <div class="right">
-          <ons-toolbar-button>
-            <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-      </ons-toolbar>
 
-      <p style="text-align: center">
-        <ons-button>Click me!</ons-button>
-      </p>
-    </ons-page>
-</body>
-</html>
+    function randomRestGenerator(params){
+      var rand = params[Math.floor(Math.random() * params.length)];
+      window.alert(rand + " has been picked!");
+    }
+    </script>
+  </head>
+  <body style ="background-color:#ffffff;">
+    <ons-navigator swipeable id="myNavigator" page="index.html"></ons-navigator>
+
+    <template id="index.html" >
+      <ons-page id="index">
+        <div style="background-color:#F6C3B3;">
+          <ons-toolbar style="background-color:#FA8072;">
+            <div class="center">Home</div>
+          </ons-toolbar>
+          <div style = "text-align: center;font-family: helvetica;font-weight: bold;font-size: 30px; color: white;">
+            <br>
+            <p>Welcome to CHUBAPP</p>
+            <div style="text-align: center;background-color:#F6C3B3;">
+              <section style="padding: 8px">
+                <ons-button id="nearby" style="width:200px">Nearby Food</ons-button>
+              </section>
+              <section style="padding: 8px">
+                <ons-button id="favourites" style="width:200px">Favourites</ons-button>
+              </section>
+              <section style="padding: 8px">
+                <ons-button id="frequent_visit" style="width:200px">Frequently Visited</ons-button>
+              </section>
+              <section style="padding: 8px">
+                <ons-button id="cuisines" style="width:200px">Cuisine</ons-button>
+              </section>
+              <section style="padding: 8px">
+                <ons-button id="locations" style="width:200px">Locations</ons-button>
+              </section>
+              <section style="padding: 8px">
+                <ons-button id="fuck" style="width:200px">Fuck me!</ons-button>
+              </section>
+
+            </div>
+          </div>
+        </div>
+      </ons-page>
+    </template>
+
+    <template id="nearby.html">
+      <ons-page id="nearby">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Home</ons-back-button></div>
+          <div class="center">Nearby</div>
+        </ons-toolbar>
+
+        <p>This is the Nearby page.</p>
+
+        <ons-button id="push-button">Back to Home</ons-button>
+      </ons-page>
+    </template>
+
+    <template id="favourites.html">
+      <ons-page id="favourites">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Home</ons-back-button></div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <p>This is the Favourites page.</p>
+        <ons-button id="push-button">Back to Home</ons-button>
+      </ons-page>
+    </template>
+
+    <template id="frequent_visit.html">
+      <ons-page id="frequent_visit">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Home</ons-back-button></div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <p>This is the Frequently Visited page.</p>
+        <ons-button id="push-button">Back to Home</ons-button>
+      </ons-page>
+    </template>
+
+    <template id="cuisines.html">
+      <ons-page id="cuisines">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Home</ons-back-button></div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <p>This is the Cuisines page.</p>
+        <ons-button id="push-button">Back to Home</ons-button>
+      </ons-page>
+    </template>
+
+    <template id="locations.html">
+      <ons-page id="locations">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Home</ons-back-button></div>
+          <div class="center"></div>
+        </ons-toolbar>
+
+        <p>This is the Locations page.</p>
+        <ons-list>
+          <ons-list-item modifier="chevron" id="push-button1" tappable>Arab Street And Kampong Glam</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button2" tappable>Boat Quay</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button3" tappable>Bukit Timah</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button4" tappable>Chinatown</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button5" tappable>City Hall</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button6" tappable>Clarke Quay</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button7" tappable>Club Street</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button8" tappable>Dempsey</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button9" tappable>East Coast, Katong And Siglap</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button10" tappable>Holland Village</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button11" tappable>Little India</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button12" tappable>Marina Bay</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button13" tappable>Orchard</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button14" tappable>Raffles Place</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button15" tappable>River Valley</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button16" tappable>Robertson Quay</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button17" tappable>Rochester Park</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button18" tappable>Sentosa</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button19" tappable>Tanjong Pagar</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button20" tappable>Tiong Bahru</ons-list-item>
+          <ons-list-item modifier="chevron" id="push-button21" tappable>VivoCity And HarbourFront</ons-list-item>
+        </ons-page>
+      </template>
+
+      <template id="arabST.html">
+        <ons-page id="arabST">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="center"></div>
+          </ons-toolbar>
+          <p>List of restaurants in Arab Street And Kampong Glam</p>
+          <ons-button id="randomise">Randomise</ons-button>
+          <ons-list>
+            <ons-list-item id="push-buttonarab1">26 Tapas Bar</ons-list-item>
+            <ons-list-item id="push-buttonarab2">A Thousand Tales</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Alaturka Turkish and Mediterranean Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Altazzag Egyptian Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Ambrosia</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Artistry</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Ash and Elm</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Beirut Grill</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Bumbu Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Byblos Grill</ons-list-item>
+            <ons-list-item id="push-buttonarab2">CAD Cafe</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Café Le Caire</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Choo Choo Chicken</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Cicheti</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Clover Garden</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Crossings Cafe</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Derwish Turkish Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Don Antonio Pizza Bar</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Elffin and Elffin Gallery Café</ons-list-item>
+            <ons-list-item id="push-buttonarab2">espressoLAB</ons-list-item>
+            <ons-list-item id="push-buttonarab1">Fictive Fingers+ And All Things Delicious</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Fika Cafe and Bistro</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Fluff Bakery</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Flying Monkey</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Gourmet Port</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Hajah Maimunah</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Hararu Izakaya</ons-list-item>
+            <ons-list-item id="push-buttonarab2">I am</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Islamic Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Koh Nangkam Southern Thai Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab2">KOI Bangers + Izakaya</ons-list-item>
+            <ons-list-item id="push-buttonarab2">La Marelle Cafe and Boutique,</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Le Pont De Vie</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Leong Kee (Klang) Bah Kut Teh</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Lickety Ice Cream and Waffles Parlour</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Ma Maison (Bugis)</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Maison Ikkoku</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Maison Ikkoku Cocktail Bar</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Nabins Experience Arabia</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Nong Khai</ons-list-item>
+            <ons-list-item id="push-buttonarab2">NOX - Dine in the Dark</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Ogopogo</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Panko</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Piedra Negra</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Pizza Fabbrica</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Ramen Champion (Bugis+)</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Sinseh : The Grocery</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Sufi Turkish and Mediterranean Restaurant</ons-list-item>
+            <ons-list-item id="push-buttonarab2">SushiAirways</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Symmetry</ons-list-item>
+            <ons-list-item id="push-buttonarab2">The Hangar</ons-list-item>
+            <ons-list-item id="push-buttonarab2">The Lab SG</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Toots Brasserie</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Vatos Urban Tacos</ons-list-item>
+            <ons-list-item id="push-buttonarab2">Vintage Delicafe</ons-list-item>
+          </ons-list>
+        </ons-page>
+      </template>
+
+      <template id="fuck.html">
+        <ons-page id="fuck">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="center"></div>
+          </ons-toolbar>
+
+          <p>This is the fuck page.</p>
+          <ons-button id="push-button">Back to Home</ons-button>
+        </ons-page>
+      </template>
+    </body>
+    </html>
