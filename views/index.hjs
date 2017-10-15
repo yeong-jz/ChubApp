@@ -48,6 +48,18 @@
         document.getElementById("favouritesList").appendChild(x);
         count = favouritesArray.length;
       }
+      else if(count > favouritesArray.length){
+        while(x.firstChild){
+          x.removeChild(x.firstChild);
+        }
+        for(var i=0;i<favouritesArray.length;i++){
+          x.appendChild(document.createTextNode(i+1 + ". "));
+          x.appendChild(document.createTextNode(favouritesArray[i]));
+          x.appendChild(document.createElement("br"));
+        }
+        document.getElementById("favouritesList").appendChild(x);
+        count = favouritesArray.length;
+      }
       else{
         document.getElementById("favouritesList").appendChild(x);
       }
