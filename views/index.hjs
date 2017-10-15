@@ -7,6 +7,7 @@
   <script>
   document.addEventListener('init', function(event) {
     var page = event.target;
+    var favourites = [];
 
     if (page.id === 'index') {
       page.querySelector('#nearby').onclick = function() {
@@ -34,6 +35,8 @@
       };
     }
     else if (page.id === 'favourites') {
+      favourites.toString();
+      console.log(favourites);
       page.querySelector('#push-button').onclick = function() {
         document.querySelector('#myNavigator').pushPage('index.html');
       };
@@ -53,7 +56,7 @@
         document.querySelector('#myNavigator').pushPage('arabST.html');
       }
       page.querySelector('#push-button2').onclick = function() {
-        document.querySelector('#myNavigator').pushPage('index.html');
+        document.querySelector('#myNavigator').pushPage('boatQuay.html');
       }
       page.querySelector('#push-button3').onclick = function() {
         document.querySelector('#myNavigator').pushPage('index.html');
@@ -117,7 +120,7 @@
       var arablist = [
         "26 Tapas Bar",
         "A Thousand Tales",
-        "Alaturka Turkish & Mediterranean Restaurant",
+        "Alaturka Turkish and Mediterranean Restaurant",
         "Altazzag Egyptian Restaurant",
         "Ambrosia",
         "Artistry",
@@ -133,10 +136,10 @@
         "Crossings Cafe",
         "Derwish Turkish Restaurant",
         "Don Antonio Pizza Bar",
-        "Elffin & Elffin Gallery Café",
+        "Elffin and Elffin Gallery Café",
         "espressoLAB",
         "Fictive Fingers+ And All Things Delicious",
-        "Fika Cafe & Bistro",
+        "Fika Cafe and Bistro",
         "Fluff Bakery",
         "Flying Monkey",
         "Gourmet Port",
@@ -146,10 +149,10 @@
         "Islamic Restaurant",
         "Koh Nangkam Southern Thai Restaurant",
         "KOI Bangers + Izakaya",
-        "La Marelle Cafe & Boutique",
+        "La Marelle Cafe and Boutique",
         "Le Pont De Vie",
         "Leong Kee (Klang) Bah Kut Teh",
-        "Lickety Ice Cream & Waffles Parlour",
+        "Lickety Ice Cream and Waffles Parlour",
         "Ma Maison (Bugis)",
         "Maison Ikkoku",
         "Maison Ikkoku Cocktail Bar",
@@ -170,19 +173,97 @@
         "Toots Brasserie",
         "Vatos Urban Tacos",
         "Vintage Delicafe"];
-        page.querySelector('#randomise').onclick = randomRestGenerator(arablist);
+        page.querySelector('#randomise').onclick = function(){
+            randomRestGenerator(arablist);
+        }
       }
+      else if (page.id === 'boatQuay') {
+        var boatQuaylist = ["UsQuBa - Scottish Restaurant and Bar",
+        "Absinthe",
+        "Amo",
+        "Beef Yakiniku Dining Yakiniquest",
+        "Braci",
+        "Charlie's Tapas, Grill and Bar",
+        "Cho Omakase",
+        "Claire Loves",
+        "Colombo Restaurant",
+        "Cuisine Master Hotpot",
+        "Da Wan Zhou—The House of Congee",
+        "Dallas Restaurant and Bar",
+        "Dojo",
+        "Draft and Craft",
+        "Enoteca L'Operetta",
+        "FOC",
+        "Gangnaroo",
+        "Golden Grill",
+        "Hombre Cantina",
+        "Jumbo Seafood Gallery @ Riverwalk",
+        "Katanashi",
+        "Kinara North West Frontier Cuisine",
+        "Loco Modern Tapas and Wine Bar",
+        "Mad Dog Bistro and Bar",
+        "Madame Patisserie",
+        "Mag's Wine Kitchen",
+        "Marco Marco (Circular Road)",
+        "Menya Sakura",
+        "Neko no Niwa",
+        "New Shah Alam Restaurant",
+        "Nothing But Green",
+        "O Comptoir",
+        "Pasta Fresca Da Salvatore",
+        "Ramen Bar Suzuki",
+        "Ricciotti",
+        "Ronin",
+        "Saffron Bistro",
+        "Sahara Bar + Restaurant",
+        "Skinny's Lounge",
+        "Song Fa Day and Night Bak Kut Teh",
+        "Sukhothai",
+        "Takumen",
+        "Tamashii Robataya",
+        "tcc the connoisseur concerto Circular Road",
+        "The New Black",
+        "Village Nasi Lemak"
+      ];
+      page.querySelector('#randomise').onclick = function(){
+        randomRestGenerator(boatQuaylist);
+      }
+
+        var buttons = document.getElementsByTagName("ons-button");
+        var buttonsCount = buttons.length;
+        for (var i = 0; i <= buttonsCount; i += 1) {
+          buttons[i].addEventListener("click", function(e) {
+            addToFavourites(this.id);
+          });
+        }
+    }
       else if (page.id === 'fuck') {
         page.querySelector('#push-button').onclick = function() {
           document.querySelector('#myNavigator').pushPage('index.html');
         };
       }
     });
+    </script>
+    <script>
+      function randomRestGenerator(params){
+        var rand = params[Math.floor(Math.random() * params.length)];
+          alert(rand + " has been picked!");
+      }
 
-    function randomRestGenerator(params){
-      var rand = params[Math.floor(Math.random() * params.length)];
-      window.alert(rand + " has been picked!");
-    }
+      function addToFavourites(params){
+        var txt = "";
+        if (confirm("Press ok to add to Favourites!") == true) {
+          txt = "You pressed OK!";
+          alert(params + " has been added to list of Favourites!");
+          favourites.push(params);
+        }
+        else {
+          txt = "You pressed Cancel!";
+          alert(params + " has not been added to list of Favourites!");
+        }
+
+
+      }
     </script>
   </head>
   <body style ="background-color:#ffffff;">
@@ -314,62 +395,127 @@
           <p>List of restaurants in Arab Street And Kampong Glam</p>
           <ons-button id="randomise">Randomise</ons-button>
           <ons-list>
-            <ons-list-item id="push-buttonarab1">26 Tapas Bar</ons-list-item>
-            <ons-list-item id="push-buttonarab2">A Thousand Tales</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Alaturka Turkish and Mediterranean Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Altazzag Egyptian Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Ambrosia</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Artistry</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Ash and Elm</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Beirut Grill</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Bumbu Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Byblos Grill</ons-list-item>
-            <ons-list-item id="push-buttonarab2">CAD Cafe</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Café Le Caire</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Choo Choo Chicken</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Cicheti</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Clover Garden</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Crossings Cafe</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Derwish Turkish Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Don Antonio Pizza Bar</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Elffin and Elffin Gallery Café</ons-list-item>
-            <ons-list-item id="push-buttonarab2">espressoLAB</ons-list-item>
-            <ons-list-item id="push-buttonarab1">Fictive Fingers+ And All Things Delicious</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Fika Cafe and Bistro</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Fluff Bakery</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Flying Monkey</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Gourmet Port</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Hajah Maimunah</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Hararu Izakaya</ons-list-item>
-            <ons-list-item id="push-buttonarab2">I am</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Islamic Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Koh Nangkam Southern Thai Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab2">KOI Bangers + Izakaya</ons-list-item>
-            <ons-list-item id="push-buttonarab2">La Marelle Cafe and Boutique,</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Le Pont De Vie</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Leong Kee (Klang) Bah Kut Teh</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Lickety Ice Cream and Waffles Parlour</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Ma Maison (Bugis)</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Maison Ikkoku</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Maison Ikkoku Cocktail Bar</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Nabins Experience Arabia</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Nong Khai</ons-list-item>
-            <ons-list-item id="push-buttonarab2">NOX - Dine in the Dark</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Ogopogo</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Panko</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Piedra Negra</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Pizza Fabbrica</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Ramen Champion (Bugis+)</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Sinseh : The Grocery</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Sufi Turkish and Mediterranean Restaurant</ons-list-item>
-            <ons-list-item id="push-buttonarab2">SushiAirways</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Symmetry</ons-list-item>
-            <ons-list-item id="push-buttonarab2">The Hangar</ons-list-item>
-            <ons-list-item id="push-buttonarab2">The Lab SG</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Toots Brasserie</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Vatos Urban Tacos</ons-list-item>
-            <ons-list-item id="push-buttonarab2">Vintage Delicafe</ons-list-item>
+            <ons-list-item >
+                <ons-button id="favourite" onclick="event.stopPropagation();">
+                  26 Tapas Bar
+                </ons-button>
+            </ons-list-item>
+            <ons-button id="A Thousand Tales" onclick=addToFavourites(this.id)>A Thousand Tales</ons-button>
+            <ons-button id="Alaturka Turkish and Mediterranean Restaurant">Alaturka Turkish and Mediterranean Restaurant</ons-button>
+            <ons-button id="Altazzag Egyptian Restaurant">Altazzag Egyptian Restaurant</ons-button>
+            <ons-button id="favourite">Ambrosia</ons-button>
+            <ons-button id="favourite">Artistry</ons-button>
+            <ons-button id="favourite">Ash and Elm</ons-button>
+            <ons-button id="favourite">Beirut Grill</ons-button>
+            <ons-button id="favourite">Bumbu Restaurant</ons-button>
+            <ons-button id="favourite">Byblos Grill</ons-button>
+            <ons-button id="favourite">CAD Cafe</ons-button>
+            <ons-button id="favourite">Café Le Caire</ons-button>
+            <ons-button id="favourite">Choo Choo Chicken</ons-button>
+            <ons-button id="favourite">Cicheti</ons-button>
+            <ons-button id="favourite">Clover Garden</ons-button>
+            <ons-button id="favourite">Crossings Cafe</ons-button>
+            <ons-button id="favourite">Derwish Turkish Restaurant</ons-button>
+            <ons-button id="favourite">Don Antonio Pizza Bar</ons-button>
+            <ons-button id="favourite">Elffin and Elffin Gallery Café</ons-button>
+            <ons-button id="favourite">espressoLAB</ons-button>
+            <ons-button id="favourite">Fictive Fingers+ And All Things Delicious</ons-button>
+            <ons-button id="favourite">Fika Cafe and Bistro</ons-button>
+            <ons-button id="favourite">Fluff Bakery</ons-button>
+            <ons-button id="favourite">Flying Monkey</ons-button>
+            <ons-button id="favourite">Gourmet Port</ons-button>
+            <ons-button id="favourite">Hajah Maimunah</ons-button>
+            <ons-button id="favourite">Hararu Izakaya</ons-button>
+            <ons-button id="favourite">I am</ons-button>
+            <ons-button id="favourite">Islamic Restaurant</ons-button>
+            <ons-button id="favourite">Koh Nangkam Southern Thai Restaurant</ons-button>
+            <ons-button id="favourite">KOI Bangers + Izakaya</ons-button>
+            <ons-button id="favourite">La Marelle Cafe and Boutique,</ons-button>
+            <ons-button id="favourite">Le Pont De Vie</ons-button>
+            <ons-button id="favourite">Leong Kee (Klang) Bah Kut Teh</ons-button>
+            <ons-button id="favourite">Lickety Ice Cream and Waffles Parlour</ons-button>
+            <ons-button id="favourite">Ma Maison (Bugis)</ons-button>
+            <ons-button id="favourite">Maison Ikkoku</ons-button>
+            <ons-button id="favourite">Maison Ikkoku Cocktail Bar</ons-button>
+            <ons-button id="favourite">Nabins Experience Arabia</ons-button>
+            <ons-button id="favourite">Nong Khai</ons-button>
+            <ons-button id="favourite">NOX - Dine in the Dark</ons-button>
+            <ons-button id="favourite">Ogopogo</ons-button>
+            <ons-button id="favourite">Panko</ons-button>
+            <ons-button id="favourite">Piedra Negra</ons-button>
+            <ons-button id="favourite">Pizza Fabbrica</ons-button>
+            <ons-button id="favourite">Ramen Champion (Bugis+)</ons-button>
+            <ons-button id="favourite">Sinseh : The Grocery</ons-button>
+            <ons-button id="favourite">Sufi Turkish and Mediterranean Restaurant</ons-button>
+            <ons-button id="favourite">SushiAirways</ons-button>
+            <ons-button id="favourite">Symmetry</ons-button>
+            <ons-button id="favourite">The Hangar</ons-button>
+            <ons-button id="favourite">The Lab SG</ons-button>
+            <ons-button id="favourite">Toots Brasserie</ons-button>
+            <ons-button id="favourite">Vatos Urban Tacos</ons-button>
+            <ons-button id="favourite">Vintage Delicafe</ons-button>
           </ons-list>
+        </ons-page>
+      </template>
+
+      <template id="boatQuay.html">
+        <ons-page id="boatQuay">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="center"></div>
+          </ons-toolbar>
+
+          <p>List of Restaurants in Boat Quay</p>
+          <ons-button id="randomise">Randomise</ons-button>
+          <ons-list>
+            <ons-list-item id="one">UsQuBa - Scottish Restaurant and Bar</ons-list-item>
+            <ons-list-item id="two">Absinthe</ons-list-item>
+            <ons-list-item id="favourite">Amo</ons-list-item>
+            <ons-list-item id="favourite">Beef Yakiniku Dining Yakiniquest</ons-list-item>
+            <ons-list-item id="favourite">Braci</ons-list-item>
+            <ons-list-item id="favourite">Charlie's Tapas, Grill and Bar</ons-list-item>
+            <ons-list-item id="favourite">Cho Omakase</ons-list-item>
+            <ons-list-item id="favourite">Claire Loves</ons-list-item>
+            <ons-list-item id="favourite">Colombo Restaurant</ons-list-item>
+            <ons-list-item id="favourite">Cuisine Master Hotpot</ons-list-item>
+            <ons-list-item id="favourite">Da Wan Zhou—The House of Congee</ons-list-item>
+            <ons-list-item id="favourite">Dallas Restaurant and Bar</ons-list-item>
+            <ons-list-item id="favourite">Dojo</ons-list-item>
+            <ons-list-item id="favourite">Draft and Craft</ons-list-item>
+            <ons-list-item id="favourite">Enoteca L'Operetta</ons-list-item>
+            <ons-list-item id="favourite">FOC</ons-list-item>
+            <ons-list-item id="favourite">Gangnaroo</ons-list-item>
+            <ons-list-item id="favourite">Golden Grill</ons-list-item>
+            <ons-list-item id="favourite">Hombre Cantina</ons-list-item>
+            <ons-list-item id="favourite">Jumbo Seafood Gallery @ Riverwalk</ons-list-item>
+            <ons-list-item id="favourite">Katanashi</ons-list-item>
+            <ons-list-item id="favourite">Kinara North West Frontier Cuisine</ons-list-item>
+            <ons-list-item id="favourite">Loco Modern Tapas and Wine Bar</ons-list-item>
+            <ons-list-item id="favourite">Mad Dog Bistro and Bar</ons-list-item>
+            <ons-list-item id="favourite">Madame Patisserie</ons-list-item>
+            <ons-list-item id="favourite">Mag's Wine Kitchen</ons-list-item>
+            <ons-list-item id="favourite">Marco Marco (Circular Road)</ons-list-item>
+            <ons-list-item id="favourite">Menya Sakura</ons-list-item>
+            <ons-list-item id="favourite">Neko no Niwa</ons-list-item>
+            <ons-list-item id="favourite">New Shah Alam Restaurant</ons-list-item>
+            <ons-list-item id="favourite">Nothing But Green</ons-list-item>
+            <ons-list-item id="favourite">O Comptoir</ons-list-item>
+            <ons-list-item id="favourite">Pasta Fresca Da Salvatore</ons-list-item>
+            <ons-list-item id="favourite">Ramen Bar Suzuki</ons-list-item>
+            <ons-list-item id="favourite">Ricciotti</ons-list-item>
+            <ons-list-item id="favourite">Ronin</ons-list-item>
+            <ons-list-item id="favourite">Saffron Bistro</ons-list-item>
+            <ons-list-item id="favourite">Sahara Bar + Restaurant</ons-list-item>
+            <ons-list-item id="favourite">Skinny's Lounge</ons-list-item>
+            <ons-list-item id="favourite">Song Fa Day and Night Bak Kut Teh</ons-list-item>
+            <ons-list-item id="favourite">Sukhothai</ons-list-item>
+            <ons-list-item id="favourite">Takumen</ons-list-item>
+            <ons-list-item id="favourite">Tamashii Robataya</ons-list-item>
+            <ons-list-item id="favourite">tcc the connoisseur concerto Circular Road</ons-list-item>
+            <ons-list-item id="favourite">The New Black</ons-list-item>
+            <ons-list-item id="favourite">Village Nasi Lemak</ons-list-item>
+          </ons-list
+
         </ons-page>
       </template>
 
@@ -381,6 +527,9 @@
           </ons-toolbar>
 
           <p>This is the fuck page.</p>
+          <img src="../fuckyou.png">
+          <br>
+          <img src="../fuckyou2.jpg">
           <ons-button id="push-button">Back to Home</ons-button>
         </ons-page>
       </template>
