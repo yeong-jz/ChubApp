@@ -7,6 +7,8 @@
   <script src="onsen-ui/js/onsenui.min.js"></script>
   <script>
   var favouritesArray = [];
+  var x = document.createElement("ons-list");
+  var count = 0;
   document.addEventListener('init', function(event) {
     var page = event.target;
 
@@ -37,13 +39,18 @@
       };
     }
     else if (page.id === 'favourites') {
-      var x = document.createElement("ons-list");
-      for(var i=0;i<favouritesArray.length;i++){
-        x.appendChild(document.createTextNode(i+1 + ". "));
-        x.appendChild(document.createTextNode(favouritesArray[i]));
-        x.appendChild(document.createElement("br"));
+      if(count < favouritesArray.length){
+        for(var i=count;i<favouritesArray.length;i++){
+          x.appendChild(document.createTextNode(i+1 + ". "));
+          x.appendChild(document.createTextNode(favouritesArray[i]));
+          x.appendChild(document.createElement("br"));
+        }
+        document.getElementById("favouritesList").appendChild(x);
+        count = favouritesArray.length;
       }
-      document.getElementById("favouritesList").appendChild(x);
+      else{
+        document.getElementById("favouritesList").appendChild(x);
+      }
 
       page.querySelector('#push-button').onclick = function() {
         document.querySelector('#myNavigator').pushPage('index.html');
@@ -188,8 +195,13 @@
         var buttonsCount = buttons.length;
         for (var i = 0; i <= buttonsCount; i += 1) {
           buttons[i].addEventListener("click", function(e) {
-            if(this.id != 'randomise')
-              addToFavourites(this.id);
+            if(!favouritesArray.includes(this.id)){
+              if(this.id != 'randomise')
+                addToFavourites(this.id);
+            }
+            else{
+              removeFromFavourites(this.id);
+            }
           });
         }
       }
@@ -244,6 +256,19 @@
       page.querySelector('#randomise').onclick = function(){
         randomRestGenerator(boatQuaylist);
       }
+      var buttons = page.getElementsByTagName("ons-button");
+      var buttonsCount = buttons.length;
+      for (var i = 0; i <= buttonsCount; i += 1) {
+        buttons[i].addEventListener("click", function(e) {
+          if(!favouritesArray.includes(this.id)){
+            if(this.id != 'randomise')
+              addToFavourites(this.id);
+          }
+          else{
+            removeFromFavourites(this.id);
+          }
+        });
+      }
     }
       else if (page.id === 'fuck') {
         page.querySelector('#push-button').onclick = function() {
@@ -268,6 +293,20 @@
         else {
           txt = "You pressed Cancel!";
           alert(params + " has not been added to list of Favourites!");
+        }
+      }
+
+      function removeFromFavourites(params){
+        var txt = "";
+        var index = favouritesArray.indexOf(params);
+        if (confirm("Press ok to remove from Favourites!") == true) {
+          txt = "You pressed OK!";
+          alert(params + " has been removed from list of Favourites!");
+          favouritesArray.splice(index, 1);
+        }
+        else {
+          txt = "You pressed Cancel!";
+          alert(params + " has not been removed from list of Favourites!");
         }
       }
 
@@ -313,27 +352,31 @@
 
     <template id="nearby.html">
       <ons-page id="nearby">
-        <ons-toolbar>
-          <div class="left"><ons-back-button>Home</ons-back-button></div>
-          <div class="center">Nearby</div>
-        </ons-toolbar>
+        <div style="background-color:#F6C3B3">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="center">Nearby</div>
+          </ons-toolbar>
 
-        <p>This is the Nearby page.</p>
+          <p>This is the Nearby page.</p>
 
-        <ons-button id="push-button">Back to Home</ons-button>
+          <ons-button id="push-button">Back to Home</ons-button>
+        </div>
       </ons-page>
     </template>
 
     <template id="favourites.html">
       <ons-page id="favourites">
-        <ons-toolbar>
-          <div class="left"><ons-back-button>Home</ons-back-button></div>
-          <div class="center"></div>
-        </ons-toolbar>
+        <div style="background-color:#F6C3B3">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="center"></div>
+          </ons-toolbar>
 
-        <p>This is the Favourites page.</p>
-        <ons-list id="favouritesList"></ons-list>
-        <ons-button id="push-button">Back to Home</ons-button>
+          <p>This is the Favourites page.</p>
+          <ons-list id="favouritesList" style="font-size:24px"></ons-list>
+          <ons-button id="push-button">Back to Home</ons-button>
+        </div>
       </ons-page>
     </template>
 
@@ -397,7 +440,7 @@
       <template id="arabST.html">
         <ons-page id="arabST">
           <ons-toolbar>
-            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="left"><ons-back-button>Back to Locations</ons-back-button></div>
             <div class="center"></div>
           </ons-toolbar>
           <p>List of restaurants in Arab Street And Kampong Glam</p>
@@ -465,59 +508,59 @@
       <template id="boatQuay.html">
         <ons-page id="boatQuay">
           <ons-toolbar>
-            <div class="left"><ons-back-button>Home</ons-back-button></div>
+            <div class="left"><ons-back-button>Back to Locations</ons-back-button></div>
             <div class="center"></div>
           </ons-toolbar>
 
           <p>List of Restaurants in Boat Quay</p>
           <ons-button id="randomise">Randomise</ons-button>
           <ons-list>
-            <ons-list-item id="one">UsQuBa - Scottish Restaurant and Bar</ons-list-item>
-            <ons-list-item id="two">Absinthe</ons-list-item>
-            <ons-list-item id="favourite">Amo</ons-list-item>
-            <ons-list-item id="favourite">Beef Yakiniku Dining Yakiniquest</ons-list-item>
-            <ons-list-item id="favourite">Braci</ons-list-item>
-            <ons-list-item id="favourite">Charlie's Tapas, Grill and Bar</ons-list-item>
-            <ons-list-item id="favourite">Cho Omakase</ons-list-item>
-            <ons-list-item id="favourite">Claire Loves</ons-list-item>
-            <ons-list-item id="favourite">Colombo Restaurant</ons-list-item>
-            <ons-list-item id="favourite">Cuisine Master Hotpot</ons-list-item>
-            <ons-list-item id="favourite">Da Wan Zhou—The House of Congee</ons-list-item>
-            <ons-list-item id="favourite">Dallas Restaurant and Bar</ons-list-item>
-            <ons-list-item id="favourite">Dojo</ons-list-item>
-            <ons-list-item id="favourite">Draft and Craft</ons-list-item>
-            <ons-list-item id="favourite">Enoteca L'Operetta</ons-list-item>
-            <ons-list-item id="favourite">FOC</ons-list-item>
-            <ons-list-item id="favourite">Gangnaroo</ons-list-item>
-            <ons-list-item id="favourite">Golden Grill</ons-list-item>
-            <ons-list-item id="favourite">Hombre Cantina</ons-list-item>
-            <ons-list-item id="favourite">Jumbo Seafood Gallery @ Riverwalk</ons-list-item>
-            <ons-list-item id="favourite">Katanashi</ons-list-item>
-            <ons-list-item id="favourite">Kinara North West Frontier Cuisine</ons-list-item>
-            <ons-list-item id="favourite">Loco Modern Tapas and Wine Bar</ons-list-item>
-            <ons-list-item id="favourite">Mad Dog Bistro and Bar</ons-list-item>
-            <ons-list-item id="favourite">Madame Patisserie</ons-list-item>
-            <ons-list-item id="favourite">Mag's Wine Kitchen</ons-list-item>
-            <ons-list-item id="favourite">Marco Marco (Circular Road)</ons-list-item>
-            <ons-list-item id="favourite">Menya Sakura</ons-list-item>
-            <ons-list-item id="favourite">Neko no Niwa</ons-list-item>
-            <ons-list-item id="favourite">New Shah Alam Restaurant</ons-list-item>
-            <ons-list-item id="favourite">Nothing But Green</ons-list-item>
-            <ons-list-item id="favourite">O Comptoir</ons-list-item>
-            <ons-list-item id="favourite">Pasta Fresca Da Salvatore</ons-list-item>
-            <ons-list-item id="favourite">Ramen Bar Suzuki</ons-list-item>
-            <ons-list-item id="favourite">Ricciotti</ons-list-item>
-            <ons-list-item id="favourite">Ronin</ons-list-item>
-            <ons-list-item id="favourite">Saffron Bistro</ons-list-item>
-            <ons-list-item id="favourite">Sahara Bar + Restaurant</ons-list-item>
-            <ons-list-item id="favourite">Skinny's Lounge</ons-list-item>
-            <ons-list-item id="favourite">Song Fa Day and Night Bak Kut Teh</ons-list-item>
-            <ons-list-item id="favourite">Sukhothai</ons-list-item>
-            <ons-list-item id="favourite">Takumen</ons-list-item>
-            <ons-list-item id="favourite">Tamashii Robataya</ons-list-item>
-            <ons-list-item id="favourite">tcc the connoisseur concerto Circular Road</ons-list-item>
-            <ons-list-item id="favourite">The New Black</ons-list-item>
-            <ons-list-item id="favourite">Village Nasi Lemak</ons-list-item>
+            <ons-button id="UsQuBa - Scottish Restaurant and Bar" modifier="quiet">UsQuBa - Scottish Restaurant and Bar</ons-button>
+            <ons-button id="Absinthe" modifier="quiet">Absinthe</ons-button>
+            <ons-button id="Amo" modifier="quiet">Amo</ons-button>
+            <ons-button id="Beef Yakiniku Dining Yakiniquest" modifier="quiet">Beef Yakiniku Dining Yakiniquest</ons-button>
+            <ons-button id="favourite" modifier="quiet">Braci</ons-button>
+            <ons-button id="favourite" modifier="quiet">Charlie's Tapas, Grill and Bar</ons-button>
+            <ons-button id="favourite" modifier="quiet">Cho Omakase</ons-button>
+            <ons-button id="favourite" modifier="quiet">Claire Loves</ons-button>
+            <ons-button id="favourite" modifier="quiet">Colombo Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">Cuisine Master Hotpot</ons-button>
+            <ons-button id="favourite" modifier="quiet">Da Wan Zhou—The House of Congee</ons-button>
+            <ons-button id="favourite" modifier="quiet">Dallas Restaurant and Bar</ons-button>
+            <ons-button id="favourite" modifier="quiet">Dojo</ons-button>
+            <ons-button id="favourite" modifier="quiet">Draft and Craft</ons-button>
+            <ons-button id="favourite" modifier="quiet">Enoteca L'Operetta</ons-button>
+            <ons-button id="favourite" modifier="quiet">FOC</ons-button>
+            <ons-button id="favourite" modifier="quiet">Gangnaroo</ons-button>
+            <ons-button id="favourite" modifier="quiet">Golden Grill</ons-button>
+            <ons-button id="favourite" modifier="quiet">Hombre Cantina</ons-button>
+            <ons-button id="favourite" modifier="quiet">Jumbo Seafood Gallery @ Riverwalk</ons-button>
+            <ons-button id="favourite" modifier="quiet">Katanashi</ons-button>
+            <ons-button id="favourite" modifier="quiet">Kinara North West Frontier Cuisine</ons-button>
+            <ons-button id="favourite" modifier="quiet">Loco Modern Tapas and Wine Bar</ons-button>
+            <ons-button id="favourite" modifier="quiet">Mad Dog Bistro and Bar</ons-button>
+            <ons-button id="favourite" modifier="quiet">Madame Patisserie</ons-button>
+            <ons-button id="favourite" modifier="quiet">Mag's Wine Kitchen</ons-button>
+            <ons-button id="favourite" modifier="quiet">Marco Marco (Circular Road)</ons-button>
+            <ons-button id="favourite" modifier="quiet">Menya Sakura</ons-button>
+            <ons-button id="favourite" modifier="quiet">Neko no Niwa</ons-button>
+            <ons-button id="favourite" modifier="quiet">New Shah Alam Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">Nothing But Green</ons-button>
+            <ons-button id="favourite" modifier="quiet">O Comptoir</ons-button>
+            <ons-button id="favourite" modifier="quiet">Pasta Fresca Da Salvatore</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ramen Bar Suzuki</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ricciotti</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ronin</ons-button>
+            <ons-button id="favourite" modifier="quiet">Saffron Bistro</ons-button>
+            <ons-button id="favourite" modifier="quiet">Sahara Bar + Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">Skinny's Lounge</ons-button>
+            <ons-button id="favourite" modifier="quiet">Song Fa Day and Night Bak Kut Teh</ons-button>
+            <ons-button id="favourite" modifier="quiet">Sukhothai</ons-button>
+            <ons-button id="favourite" modifier="quiet">Takumen</ons-button>
+            <ons-button id="favourite" modifier="quiet">Tamashii Robataya</ons-button>
+            <ons-button id="favourite" modifier="quiet">tcc the connoisseur concerto Circular Road</ons-button>
+            <ons-button id="favourite" modifier="quiet">The New Black</ons-button>
+            <ons-button id="favourite" modifier="quiet">Village Nasi Lemak</ons-button>
           </ons-list
 
         </ons-page>
