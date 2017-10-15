@@ -3,11 +3,13 @@
 <head>
   <link rel="stylesheet" href="onsen-ui/css/onsenui.css">
   <link rel="stylesheet" href="onsen-ui/css/onsen-css-components.min.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script src="onsen-ui/js/onsenui.min.js"></script>
   <script>
+  var favouritesArray = [];
   document.addEventListener('init', function(event) {
     var page = event.target;
-    var favourites = [];
+
 
     if (page.id === 'index') {
       page.querySelector('#nearby').onclick = function() {
@@ -35,8 +37,14 @@
       };
     }
     else if (page.id === 'favourites') {
-      favourites.toString();
-      console.log(favourites);
+      var x = document.createElement("ons-list");
+      for(var i=0;i<favouritesArray.length;i++){
+        x.appendChild(document.createTextNode(i+1 + ". "));
+        x.appendChild(document.createTextNode(favouritesArray[i]));
+        x.appendChild(document.createElement("br"));
+      }
+      document.getElementById("favouritesList").appendChild(x);
+
       page.querySelector('#push-button').onclick = function() {
         document.querySelector('#myNavigator').pushPage('index.html');
       };
@@ -176,6 +184,14 @@
         page.querySelector('#randomise').onclick = function(){
             randomRestGenerator(arablist);
         }
+        var buttons = page.getElementsByTagName("ons-button");
+        var buttonsCount = buttons.length;
+        for (var i = 0; i <= buttonsCount; i += 1) {
+          buttons[i].addEventListener("click", function(e) {
+            if(this.id != 'randomise')
+              addToFavourites(this.id);
+          });
+        }
       }
       else if (page.id === 'boatQuay') {
         var boatQuaylist = ["UsQuBa - Scottish Restaurant and Bar",
@@ -228,14 +244,6 @@
       page.querySelector('#randomise').onclick = function(){
         randomRestGenerator(boatQuaylist);
       }
-
-        var buttons = document.getElementsByTagName("ons-button");
-        var buttonsCount = buttons.length;
-        for (var i = 0; i <= buttonsCount; i += 1) {
-          buttons[i].addEventListener("click", function(e) {
-            addToFavourites(this.id);
-          });
-        }
     }
       else if (page.id === 'fuck') {
         page.querySelector('#push-button').onclick = function() {
@@ -255,15 +263,14 @@
         if (confirm("Press ok to add to Favourites!") == true) {
           txt = "You pressed OK!";
           alert(params + " has been added to list of Favourites!");
-          favourites.push(params);
+          favouritesArray.push(params);
         }
         else {
           txt = "You pressed Cancel!";
           alert(params + " has not been added to list of Favourites!");
         }
-
-
       }
+
     </script>
   </head>
   <body style ="background-color:#ffffff;">
@@ -325,6 +332,7 @@
         </ons-toolbar>
 
         <p>This is the Favourites page.</p>
+        <ons-list id="favouritesList"></ons-list>
         <ons-button id="push-button">Back to Home</ons-button>
       </ons-page>
     </template>
@@ -395,65 +403,61 @@
           <p>List of restaurants in Arab Street And Kampong Glam</p>
           <ons-button id="randomise">Randomise</ons-button>
           <ons-list>
-            <ons-list-item >
-                <ons-button id="favourite" onclick="event.stopPropagation();">
-                  26 Tapas Bar
-                </ons-button>
-            </ons-list-item>
-            <ons-button id="A Thousand Tales" onclick=addToFavourites(this.id)>A Thousand Tales</ons-button>
-            <ons-button id="Alaturka Turkish and Mediterranean Restaurant">Alaturka Turkish and Mediterranean Restaurant</ons-button>
-            <ons-button id="Altazzag Egyptian Restaurant">Altazzag Egyptian Restaurant</ons-button>
-            <ons-button id="favourite">Ambrosia</ons-button>
-            <ons-button id="favourite">Artistry</ons-button>
-            <ons-button id="favourite">Ash and Elm</ons-button>
-            <ons-button id="favourite">Beirut Grill</ons-button>
-            <ons-button id="favourite">Bumbu Restaurant</ons-button>
-            <ons-button id="favourite">Byblos Grill</ons-button>
-            <ons-button id="favourite">CAD Cafe</ons-button>
-            <ons-button id="favourite">Café Le Caire</ons-button>
-            <ons-button id="favourite">Choo Choo Chicken</ons-button>
-            <ons-button id="favourite">Cicheti</ons-button>
-            <ons-button id="favourite">Clover Garden</ons-button>
-            <ons-button id="favourite">Crossings Cafe</ons-button>
-            <ons-button id="favourite">Derwish Turkish Restaurant</ons-button>
-            <ons-button id="favourite">Don Antonio Pizza Bar</ons-button>
-            <ons-button id="favourite">Elffin and Elffin Gallery Café</ons-button>
-            <ons-button id="favourite">espressoLAB</ons-button>
-            <ons-button id="favourite">Fictive Fingers+ And All Things Delicious</ons-button>
-            <ons-button id="favourite">Fika Cafe and Bistro</ons-button>
-            <ons-button id="favourite">Fluff Bakery</ons-button>
-            <ons-button id="favourite">Flying Monkey</ons-button>
-            <ons-button id="favourite">Gourmet Port</ons-button>
-            <ons-button id="favourite">Hajah Maimunah</ons-button>
-            <ons-button id="favourite">Hararu Izakaya</ons-button>
-            <ons-button id="favourite">I am</ons-button>
-            <ons-button id="favourite">Islamic Restaurant</ons-button>
-            <ons-button id="favourite">Koh Nangkam Southern Thai Restaurant</ons-button>
-            <ons-button id="favourite">KOI Bangers + Izakaya</ons-button>
-            <ons-button id="favourite">La Marelle Cafe and Boutique,</ons-button>
-            <ons-button id="favourite">Le Pont De Vie</ons-button>
-            <ons-button id="favourite">Leong Kee (Klang) Bah Kut Teh</ons-button>
-            <ons-button id="favourite">Lickety Ice Cream and Waffles Parlour</ons-button>
-            <ons-button id="favourite">Ma Maison (Bugis)</ons-button>
-            <ons-button id="favourite">Maison Ikkoku</ons-button>
-            <ons-button id="favourite">Maison Ikkoku Cocktail Bar</ons-button>
-            <ons-button id="favourite">Nabins Experience Arabia</ons-button>
-            <ons-button id="favourite">Nong Khai</ons-button>
-            <ons-button id="favourite">NOX - Dine in the Dark</ons-button>
-            <ons-button id="favourite">Ogopogo</ons-button>
-            <ons-button id="favourite">Panko</ons-button>
-            <ons-button id="favourite">Piedra Negra</ons-button>
-            <ons-button id="favourite">Pizza Fabbrica</ons-button>
-            <ons-button id="favourite">Ramen Champion (Bugis+)</ons-button>
-            <ons-button id="favourite">Sinseh : The Grocery</ons-button>
-            <ons-button id="favourite">Sufi Turkish and Mediterranean Restaurant</ons-button>
-            <ons-button id="favourite">SushiAirways</ons-button>
-            <ons-button id="favourite">Symmetry</ons-button>
-            <ons-button id="favourite">The Hangar</ons-button>
-            <ons-button id="favourite">The Lab SG</ons-button>
-            <ons-button id="favourite">Toots Brasserie</ons-button>
-            <ons-button id="favourite">Vatos Urban Tacos</ons-button>
-            <ons-button id="favourite">Vintage Delicafe</ons-button>
+            <ons-button id="26 Tapas Bar" modifier="quiet">26 Tapas Bar</ons-button>
+            <ons-button id="A Thousand Tales" modifier="quiet">A Thousand Tales</ons-button>
+            <ons-button id="Alaturka Turkish and Mediterranean Restaurant" modifier="quiet">Alaturka Turkish and Mediterranean Restaurant</ons-button>
+            <ons-button id="Altazzag Egyptian Restaurant" modifier="quiet">Altazzag Egyptian Restaurant</ons-button>
+            <ons-button id="Ambrosia" modifier="quiet">Ambrosia</ons-button>
+            <ons-button id="Artistry" modifier="quiet">Artistry</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ash and Elm</ons-button>
+            <ons-button id="favourite" modifier="quiet">Beirut Grill</ons-button>
+            <ons-button id="favourite" modifier="quiet">Bumbu Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">Byblos Grill</ons-button>
+            <ons-button id="favourite" modifier="quiet">CAD Cafe</ons-button>
+            <ons-button id="favourite" modifier="quiet">Café Le Caire</ons-button>
+            <ons-button id="favourite" modifier="quiet">Choo Choo Chicken</ons-button>
+            <ons-button id="favourite" modifier="quiet">Cicheti</ons-button>
+            <ons-button id="favourite" modifier="quiet">Clover Garden</ons-button>
+            <ons-button id="favourite" modifier="quiet">Crossings Cafe</ons-button>
+            <ons-button id="favourite" modifier="quiet">Derwish Turkish Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">Don Antonio Pizza Bar</ons-button>
+            <ons-button id="favourite" modifier="quiet">Elffin and Elffin Gallery Café</ons-button>
+            <ons-button id="favourite" modifier="quiet">espressoLAB</ons-button>
+            <ons-button id="favourite" modifier="quiet">Fictive Fingers+ And All Things Delicious</ons-button>
+            <ons-button id="favourite" modifier="quiet">Fika Cafe and Bistro</ons-button>
+            <ons-button id="favourite" modifier="quiet">Fluff Bakery</ons-button>
+            <ons-button id="favourite" modifier="quiet">Flying Monkey</ons-button>
+            <ons-button id="favourite" modifier="quiet">Gourmet Port</ons-button>
+            <ons-button id="favourite" modifier="quiet">Hajah Maimunah</ons-button>
+            <ons-button id="favourite" modifier="quiet">Hararu Izakaya</ons-button>
+            <ons-button id="favourite" modifier="quiet">I am</ons-button>
+            <ons-button id="favourite" modifier="quiet">Islamic Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">Koh Nangkam Southern Thai Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">KOI Bangers + Izakaya</ons-button>
+            <ons-button id="favourite" modifier="quiet">La Marelle Cafe and Boutique,</ons-button>
+            <ons-button id="favourite" modifier="quiet">Le Pont De Vie</ons-button>
+            <ons-button id="favourite" modifier="quiet">Leong Kee (Klang) Bah Kut Teh</ons-button>
+            <ons-button id="favourite" modifier="quiet">Lickety Ice Cream and Waffles Parlour</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ma Maison (Bugis)</ons-button>
+            <ons-button id="favourite" modifier="quiet">Maison Ikkoku</ons-button>
+            <ons-button id="favourite" modifier="quiet">Maison Ikkoku Cocktail Bar</ons-button>
+            <ons-button id="favourite" modifier="quiet">Nabins Experience Arabia</ons-button>
+            <ons-button id="favourite" modifier="quiet">Nong Khai</ons-button>
+            <ons-button id="favourite" modifier="quiet">NOX - Dine in the Dark</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ogopogo</ons-button>
+            <ons-button id="favourite" modifier="quiet">Panko</ons-button>
+            <ons-button id="favourite" modifier="quiet">Piedra Negra</ons-button>
+            <ons-button id="favourite" modifier="quiet">Pizza Fabbrica</ons-button>
+            <ons-button id="favourite" modifier="quiet">Ramen Champion (Bugis+)</ons-button>
+            <ons-button id="favourite" modifier="quiet">Sinseh : The Grocery</ons-button>
+            <ons-button id="favourite" modifier="quiet">Sufi Turkish and Mediterranean Restaurant</ons-button>
+            <ons-button id="favourite" modifier="quiet">SushiAirways</ons-button>
+            <ons-button id="favourite" modifier="quiet">Symmetry</ons-button>
+            <ons-button id="favourite" modifier="quiet">The Hangar</ons-button>
+            <ons-button id="favourite" modifier="quiet">The Lab SG</ons-button>
+            <ons-button id="favourite" modifier="quiet">Toots Brasserie</ons-button>
+            <ons-button id="favourite" modifier="quiet">Vatos Urban Tacos</ons-button>
+            <ons-button id="favourite" modifier="quiet">Vintage Delicafe</ons-button>
           </ons-list>
         </ons-page>
       </template>
